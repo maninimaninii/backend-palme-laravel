@@ -17,7 +17,7 @@
         </div>
 
         <div class="form-group">
-            <label for="pays">Origine du Lauréat</label>
+            <label for="pays">Origine du Film</label>
             <input type="text" name="pays" id="pays" class="form-control" value="{{ $film->paysFilm }}" required>
         </div>
         

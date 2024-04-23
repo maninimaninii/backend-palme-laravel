@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\P09Laureat;
+use App\Models\P09Prix;
+
+use App\Models\P09Recompenserlaureat;
 
 class LaureatController extends Controller
 {
@@ -54,6 +57,30 @@ class LaureatController extends Controller
         $laureat->delete();
 
         return redirect()->route('liste_laureats')->with('success', 'Lauréat supprimé avec succès.');
+    }
+
+
+
+    public function add (){
+        $prix = P09Prix::all();
+        return view('laureats.add', compact('prix')); 
+
+    }
+
+    public function store(Request $request){
+        $laureat = P09Laureat::create([
+            'nomLaureat' =>$request->input('nom'),
+            'pays'=> $request->input('pays'),
+            'sexe' => $request->input('sexe'), 
+            'metier' => $request->input('metier')
+        ]);
+        $rec = P09Recompenserlaureat::create([
+            'idLaureat' => $laureat->idLaureat,
+            'idPrix' => $request->input('prix_id'),
+            'editionPrixL' => $request->input('edition'),
+        ]);
+
+        return redirect()->route('liste_laureats');
     }
     
 }

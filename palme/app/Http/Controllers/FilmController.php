@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\P09Film;
 use App\Models\P09Laureat;
+use App\Models\P09Recompenserfilm;
+use App\Models\P09Prix;
 
 use Illuminate\Http\Request;
 
@@ -36,5 +38,27 @@ class FilmController extends Controller
         $film->delete();
 
         return redirect()->route('liste_films')->with('success', 'Film supprimé avec succès.');
+    }
+
+    public function add (){
+        $prix = P09Prix::all();
+        $laureats =  P09Laureat::where('metier', 'realisateur')->get();
+        return view('films.add', compact('laureats', 'prix')); 
+
+    }
+
+    public function store(Request $request){
+        $film = P09Film::create([
+            'titreFilm' =>$request->input('titre'),
+            'paysFilm'=> $request->input('pays'),
+            'idRealisateur' => $request->input('idreal')
+        ]);
+        $rec = P09Recompenserfilm::create([
+            'idFilm' => $film->idFilm,
+            'idPrix' => $request->input('prix_id'),
+            'editionPrixF' => $request->input('edition'),
+        ]);
+        return redirect()->route('liste_films');
+
     }
 }

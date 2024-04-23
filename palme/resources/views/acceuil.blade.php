@@ -11,6 +11,8 @@
         <ul class="navigation">
             <li><a href="{{ route('liste_films') }}">Films récompensés</a></li>
             <li><a href="{{ route('liste_laureats') }}">Lauréats</a></li>
+            <li><a href="{{ route('films.add') }}">Ajouter Film</a></li>
+            <li><a href="{{ route('laureats.add') }}">Ajouter Lauréat</a></li>
         </ul>
     </div>
     <h1 class="titre">Bienvenue !</h1>
