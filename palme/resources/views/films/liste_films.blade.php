@@ -1,14 +1,6 @@
-<!-- resources/views/films/liste_films.blade.php -->
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Lauréats</title>
-</head>
-<body>
-    <h1>Liste des Lauréats</h1>
+@extends ('layout\liste')
+ @section('content')
+    <h1>Liste des Films</h1>
     <table>
         <thead>
             <tr>
@@ -17,6 +9,7 @@
                 <th>Réalisateur</th>
                 <th>Edition</th>
                 <th>Prix</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +17,7 @@
                 <tr>
                     <td>{{ $film->titreFilm }}</td>
                     <td>{{ $film->paysFilm }}</td>
-                    <td>{{ $film->realisateur -> nomLaureat }}</td>
+                    <td>{{ $film->realisateur }}</td>
                     <td>
                         <ul>
                             @foreach ($film->recompenses as $recompense)
@@ -39,9 +32,20 @@
                             @endforeach
                         </ul>
                     </td>
+                    <td>
+                    <form action="{{ route('films.edit', $film->idFilm) }}" method="GET">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    </form>
+
+                    <form action="{{ route('films.destroy',  $film->idFilm) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Supprimer</button>
+                    </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+    @endsection

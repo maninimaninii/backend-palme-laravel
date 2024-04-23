@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Lauréats</title>
-</head>
-<body>
+@extends('layout\liste')
+
+@section('content')
+   
     <h1>Liste des Lauréats</h1>
     <table>
         <thead>
@@ -41,7 +37,11 @@
                         </ul>
                     </td>
                     <td>
-                    <a href="{{ route('laureats.edit', $laureat->idLaureat) }}" class="btn btn-primary">Modifier</a>
+                    <form action="{{ route('laureats.edit', $laureat->idLaureat) }}" method="GET">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                    </form>
+
                     <form action="{{ route('laureats.destroy', $laureat->idLaureat) }}" method="POST">
                         @csrf
                         @method('DELETE')
@@ -52,5 +52,4 @@
             @endforeach
         </tbody>
     </table>
-</body>
-</html>
+    @endsection

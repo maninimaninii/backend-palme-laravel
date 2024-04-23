@@ -9,7 +9,7 @@
 <header>
     <div class="navbar">
         <ul class="navigation">
-            <li><a href="{{ route('films.listefilms') }}">Films récompensés</a></li>
+            <li><a href="{{ route('liste_films') }}">Films récompensés</a></li>
             <li><a href="{{ route('liste_laureats') }}">Lauréats</a></li>
         </ul>
     </div>
